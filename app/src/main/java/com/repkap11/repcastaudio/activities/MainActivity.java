@@ -1,7 +1,9 @@
-package com.repkap11.repcastaudio;
+package com.repkap11.repcastaudio.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.repkap11.repcastaudio.R;
 
 public class MainActivity extends AppCompatActivity {
 
