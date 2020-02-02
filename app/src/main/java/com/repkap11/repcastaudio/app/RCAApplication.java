@@ -34,7 +34,7 @@ public class RCAApplication extends android.app.Application {
 
     private static final String TAG = Application.class.getSimpleName();
 
-    public static String getUserPerferedLunchGroup(Context context) {
+    public static String getUserPerferedAudioGroup(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String pref = prefs.getString(RCAApplication.PREF_AUDIO_GROUP, null);
         return pref;
@@ -153,7 +153,7 @@ public class RCAApplication extends android.app.Application {
 
     public static String getUserKey(Context context) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String group = getUserPerferedLunchGroup(context);
+        String group = getUserPerferedAudioGroup(context);
         if (group == null || user == null) {
             return null;
         }

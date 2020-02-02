@@ -19,9 +19,11 @@ import android.widget.Toast;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -37,11 +39,11 @@ import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.repkap11.burger.UpdateAppTask;
 import com.repkap11.repcastaudio.R;
 import com.repkap11.repcastaudio.activities.SettingsActivity;
 import com.repkap11.repcastaudio.activities.SignInFractivity;
 import com.repkap11.repcastaudio.app.RCAApplication;
+import com.repkap11.repcastaudio.app.UpdateAppTask;
 import com.repkap11.repcastaudio.fractivity.Fractivity;
 import com.repkap11.repcastaudio.model.User;
 
@@ -95,7 +97,7 @@ public abstract class BarMenuFractivity extends Fractivity<Fractivity.Fractivity
                 boolean needsNewTrigger = mUpdateMenuItem == null;
                 mUpdateMenuItem = menu.findItem(R.id.action_update);
                 mUpdateMenuItem.setShowAsAction(mShowingAsActionFlag);
-                String groupKey = RCAApplication.getUserPerferedLunchGroup(getActivity());
+                String groupKey = RCAApplication.getUserPerferedAudioGroup(getActivity());
                 if (groupKey != null && needsNewTrigger) {
                     String userKey = RCAApplication.getUserKey(getActivity());
                     if (userKey != null) {
@@ -104,7 +106,7 @@ public abstract class BarMenuFractivity extends Fractivity<Fractivity.Fractivity
                         DatabaseReference appVersionRef = database.getReference(userKey).child(User.getAppVersionLink());
                         appVersionRef.setValue(mCurrentAppVersionNumber);
                     }
-                    DatabaseReference groupsAppVersionRef = FirebaseDatabase.getInstance().getReference(groupKey).getParent().child("appVersion");
+                    DatabaseReference groupsAppVersionRef = FirebaseDatabase.getInstance().getReference("androidVersion");
                     groupsAppVersionRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -226,9 +228,9 @@ public abstract class BarMenuFractivity extends Fractivity<Fractivity.Fractivity
             Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.fractivity_bar_menu_toolbar);
             Log.w(TAG, "createView: mShowBar being used as:" + mShowBar);
             if (mShowBar) {
-                toolbar.setTitle(getBarTitleString(getActivity()));
+                ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
                 //getActivity().setActionBar(toolbar);
-                //(Fractivity) getActivity()).setActionBar(toolbar);
+                toolbar.setTitle(getBarTitleString(getActivity()));
                 boolean showBackIcon = getShowBackIcon();
                 if (showBackIcon) {
                     Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_clear_black, null);
@@ -255,6 +257,7 @@ public abstract class BarMenuFractivity extends Fractivity<Fractivity.Fractivity
             } else {
                 fab.hide();
             }
+
             return rootView;
         }
 

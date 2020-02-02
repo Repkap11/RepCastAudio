@@ -14,11 +14,12 @@
     <string name="action_update">Update</string>
     <string name="action_sign_out">Sign Out</string>
 
-    <string name="fractivity_audio_groups_title">Lunch Groups</string>
+    <string name="fractivity_audio_groups_title">Audio Groups</string>
+    <string name="fractivity_add_audio_group_title">Select an Audio Group</string>
 
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
 
-    <string name="update_url">https://repkap11.com/RepCastAudio/RepCastAudio.apk</string>
+    <string name="update_url">https://repkap11.com/repcastaudio/RepCastAudio.apk</string>
     <string name="update_app_task_signatures_dont_match">Signatures do not match, are you running a debug version of the app?</string>
     <string name="update_app_task_no_update_avaliable">Already up to date with Repkap11.com</string>
     <string name="update_app_task_you_are_newer">You have a newer version than the server. Lucky you.</string>
@@ -42,6 +43,8 @@
 
     <string name="notification_channel_name">Playback Notifications with Play/Pause ect...</string>
     <string name="notification_channel_description">At the moment every notification is in this default group.</string>
+    <string name="fractivity_audio_groups_delete_item_title">Delete Audio Group</string>
+    <string name="fractivity_audio_groups_delete_item_message">Are you sure you want to delete group \"%1$s\"</string>
 
 
 </resources>

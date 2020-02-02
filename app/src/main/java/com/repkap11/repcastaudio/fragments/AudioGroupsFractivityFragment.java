@@ -3,6 +3,7 @@ package com.repkap11.repcastaudio.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.repkap11.repcastaudio.R;
+import com.repkap11.repcastaudio.activities.AddAudioGroupFractivity;
+import com.repkap11.repcastaudio.app.LongClickDeleteDialogFragment;
 import com.repkap11.repcastaudio.app.RCAApplication;
 import com.repkap11.repcastaudio.firebase.FirebaseAdapterFractivity;
 import com.repkap11.repcastaudio.model.AudioGroup;
@@ -47,7 +52,7 @@ public class AudioGroupsFractivityFragment extends FirebaseAdapterFractivity.Fir
 
     @Override
     protected void onFabClick() {
-        //startActivity(new Intent(getActivity(), AddLunchGroupFractivity.class));
+        startActivity(new Intent(getActivity(), AddAudioGroupFractivity.class));
     }
 
     @Override
@@ -61,7 +66,6 @@ public class AudioGroupsFractivityFragment extends FirebaseAdapterFractivity.Fir
     }
 
     private ListView mListView;
-    private FloatingActionButton mFab;
 
     //Using this activity view
     @Override
@@ -74,7 +78,6 @@ public class AudioGroupsFractivityFragment extends FirebaseAdapterFractivity.Fir
     @Override
     protected void destroyView() {
         mListView = null;
-        mFab = null;
         super.destroyView();
     }
 
@@ -145,6 +148,20 @@ public class AudioGroupsFractivityFragment extends FirebaseAdapterFractivity.Fir
         Log.e(TAG, "onItemClicked: TODO send an intent when the groups is clicked.");
 
         //startActivity(intent);
+    }
+
+    @Override
+    protected boolean onItemLongClicked(View view, Object holderObject, int position, String key, String link, Object value) {
+        AudioGroup audioGroup = (AudioGroup) value;
+        Holder holder = (Holder) holderObject;
+        DialogFragment df = new LongClickDeleteDialogFragment();
+        Bundle args = new Bundle();
+        args.putString(LongClickDeleteDialogFragment.ARG_TITLE, getActivity().getResources().getString(R.string.fractivity_audio_groups_delete_item_title));
+        args.putString(LongClickDeleteDialogFragment.ARG_MESSAGE, getString(R.string.fractivity_audio_groups_delete_item_message, audioGroup.displayName));
+        args.putString(LongClickDeleteDialogFragment.ARG_KEY, key);
+        df.setArguments(args);
+        df.show(getActivity().getSupportFragmentManager(), "");
+        return true;
     }
 
     public static class Holder {

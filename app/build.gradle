@@ -10,6 +10,7 @@ android {
         versionCode file("RCAVersion").text.trim().toInteger().intValue()
         versionName "0." + file("RCAVersion").text.trim()
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        setProperty("archivesBaseName","RepCastAudio-" + versionCode)
     }
     buildTypes {
         release {

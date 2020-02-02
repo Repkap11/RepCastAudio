@@ -18,9 +18,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.repkap11.repcastaudio.fractivity.Fractivity;
 
 
-public abstract class FirebaseAdapterFractivity<AdapterHolder, AdapterData> extends Fractivity<FirebaseAdapterFractivity.FirebaseAdapterFragment> {
+public abstract class FirebaseAdapterFractivity<AdapterHolder, AdapterData> extends BarMenuFractivity {
     private static final String TAG = FirebaseAdapterFractivity.class.getSimpleName();
-
 
     //Since Fractivity onCreate needs to not be final (for version string checking) enfore that here
     @Override

@@ -21,6 +21,6 @@ public class User {
     }
 
     public static String getAppVersionLink() {
-        return "appVersion";
+        return "androidVersion";
     }
 }
